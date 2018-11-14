@@ -1,20 +1,26 @@
 <template>
   <div class="hello container">
-      <div class="media">
-        <img class="align-self-start mr-3" src="http://lorempixel.com/100/100/sports/" alt="Generic placeholder image">
-            <div class="media-body">
-                <h5 class="mt-0">Top-aligned media</h5>
-                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            </div>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" v-model="message" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" @click="submitMessage()" type="button" id="button-addon2">Button</button>
+      </div>
+    </div>
+      <div class="media my-3" v-for="item in messages">
+        <img v-if="item.username != username " class="align-self-start mr-3" src="http://lorempixel.com/100/100/sports/" alt="Generic placeholder image">
+        <div class="media-body">
+            <h5 class="mt-0">{{item.username}}</h5>
+            <p>{{item.message}}</p>
         </div>
-        <div class="media">
+        <img v-if="item.username == username " class="ml-3" src="http://lorempixel.com/100/100/sports/" alt="Generic placeholder image">
+      </div>
+        <!-- <div class="media">
             <div class="media-body">
                 <h5 class="mt-0 mb-1">Media object</h5>
                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
             </div>
             <img class="ml-3" src="http://lorempixel.com/100/100/sports/" alt="Generic placeholder image">
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -23,7 +29,29 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: ''
+      msg: '',
+      username: 'Annie',
+      message: '',
+      messages: [
+        {
+          username: 'Annie',
+          message: 'Hello'
+        },
+        {
+          username: 'Tsai',
+          message: 'HiHi'
+        }
+        
+      ]
+    }
+  },
+  methods: {
+    submitMessage(){
+      let vm = this
+      vm.messages.push({
+        username: vm.username,
+        message: vm.message
+      })
     }
   }
 }
