@@ -48,10 +48,13 @@ export default {
   methods: {
     submitMessage(){
       let vm = this
-      vm.messages.push({
+      vm.messages.unshift({
         username: vm.username,
         message: vm.message
+
+
       })
+      vm.message = ''
     }
   }
 }
